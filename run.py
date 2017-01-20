@@ -35,7 +35,7 @@ if __name__ == '__main__':
                 if das_result == 0:  # boss
                     print('Das is approaching')
                     show_image()
-                if craig_result == 0:
+                elif craig_result == 0:
                     print('Craig is approaching')
                     show_image('./images_to_display/craig_dash.jpg')
                 else:
