@@ -13,7 +13,7 @@ from keras.utils import np_utils
 from keras.models import load_model
 from keras import backend as K
 
-from boss_input import extract_data, resize_with_pad, IMAGE_SIZE
+from input import extract_data, resize_with_pad, IMAGE_SIZE
 
 
 class Dataset(object):
@@ -26,8 +26,8 @@ class Dataset(object):
         self.Y_valid = None
         self.Y_test = None
 
-    def read(self, img_rows=IMAGE_SIZE, img_cols=IMAGE_SIZE, img_channels=3, nb_classes=2):
-        images, labels = extract_data('./data/')
+    def read(self, userFolder='das', img_rows=IMAGE_SIZE, img_cols=IMAGE_SIZE, img_channels=3, nb_classes=2):
+        images, labels = extract_data('./data/', userFolder)
         labels = np.reshape(labels, [-1])
         # numpy.reshape
         X_train, X_test, y_train, y_test = train_test_split(images, labels, test_size=0.3, random_state=random.randint(0, 100))
@@ -72,6 +72,7 @@ class Dataset(object):
 class Model(object):
 
     FILE_PATH = './store/model.h5'
+    FILE_T_PATH = './store/model2.h5'
 
     def __init__(self):
         self.model = None
@@ -170,6 +171,7 @@ class Model(object):
         print("%s: %.2f%%" % (self.model.metrics_names[1], score[1] * 100))
 
 if __name__ == '__main__':
+    #### build first image into model
     dataset = Dataset()
     dataset.read()
 
@@ -178,6 +180,15 @@ if __name__ == '__main__':
     model.train(dataset, nb_epoch=10)
     model.save()
 
+    # model = Model()
+    # model.load()
+    # model.evaluate(dataset)
+
+    ########  build second image into model
+    dataset = Dataset()
+    dataset.read('craig')
+
     model = Model()
-    model.load()
-    model.evaluate(dataset)
+    model.build_model(dataset)
+    model.train(dataset, nb_epoch=10)
+    model.save('./store/model2.h5')

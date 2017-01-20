@@ -7,7 +7,7 @@ Boss stands up. He is approaching.
 ![standup](https://github.com/Hironsan/BossSensor/blob/master/resource_for_readme/standup.jpg)
 
 When he is approaching, fetch face images and classify image.
- 
+
 ![approaching](https://github.com/Hironsan/BossSensor/blob/master/resource_for_readme/approach.jpg)
 
 If image is classified as the Boss, monitor changes.
@@ -28,14 +28,14 @@ Put images into [data/boss](https://github.com/Hironsan/BossSensor/tree/master/d
 First, Train boss image.
 
 ```
-$ python boss_train.py
+$ python train.py
 ```
 
 
-Second, start BossSensor. 
+Second, start BossSensor.
 
 ```
-$ python camera_reader.py
+$ python run.py
 ```
 
 ## Install
@@ -49,7 +49,7 @@ conda install -c conda-forge tensorflow
 pip install -r requirements.txt
 ```
 
-Change Keras backend from Theano to TensorFlow. 
+Change Keras backend from Theano to TensorFlow.
 
 ## Licence
 

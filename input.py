@@ -58,9 +58,11 @@ def read_image(file_path):
     return image
 
 
-def extract_data(path):
+def extract_data(path, userFolder='das'):
     images, labels = traverse_dir(path)
     images = np.array(images)
-    labels = np.array([0 if label.endswith('boss') else 1 for label in labels])
+    # labels is each images folder (i.e. /data/craig, /data/craig)
+    labels = np.array([0 if label.endswith(userFolder) else 1 for label in labels])
+    # if matches X use 0 else use 1. so 0 for match
 
     return images, labels
