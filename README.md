@@ -9,6 +9,14 @@ Change picture depending who is looking at the screen.
 * Anaconda
 * Many boss image and other person image
 
+## Setup
+Decompose video into many images.
+
+```
+ffmpeg -i me1.mov -r 4 output_%04d.jpg
+```
+
+
 ## Usage
 First, Training.
 
